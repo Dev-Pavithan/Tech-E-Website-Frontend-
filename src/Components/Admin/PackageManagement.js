@@ -21,13 +21,16 @@ export default function PackageManagement() {
     const [error, setError] = useState(null);
     const [showForm, setShowForm] = useState(false);
 
+    // Get the backend URL from the environment variable
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
     useEffect(() => {
         fetchPackages();
     }, []);
 
     const fetchPackages = async () => {
         try {
-            const response = await axios.get('http://localhost:7100/api/packages');
+            const response = await axios.get(`${backendUrl}/api/packages`);
             setPackages(response.data);
         } catch (error) {
             console.error('Error fetching packages:', error);
@@ -55,7 +58,7 @@ export default function PackageManagement() {
         }
 
         try {
-            await axios.post('http://localhost:7100/api/packages', formData, {
+            await axios.post(`${backendUrl}/api/packages`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             await fetchPackages();
@@ -80,7 +83,7 @@ export default function PackageManagement() {
         }
 
         try {
-            await axios.put(`http://localhost:7100/api/packages/${editingPackage._id}`, formData, {
+            await axios.put(`${backendUrl}/api/packages/${editingPackage._id}`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             await fetchPackages();
@@ -105,7 +108,7 @@ export default function PackageManagement() {
 
     const deletePackage = async (id) => {
         try {
-            await axios.delete(`http://localhost:7100/api/packages/${id}`);
+            await axios.delete(`${backendUrl}/api/packages/${id}`);
             fetchPackages();
         } catch (error) {
             console.error('Error deleting package:', error);

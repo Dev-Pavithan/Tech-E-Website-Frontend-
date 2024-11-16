@@ -37,9 +37,12 @@ export default function Settings() {
 
   const getToken = () => sessionStorage.getItem('token');
 
+  // Get the backend URL from the environment variable
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   const fetchUserProfileImage = async () => {
     try {
-      const res = await axios.get(`http://localhost:7100/user/profile-image`, {
+      const res = await axios.get(`${backendUrl}/user/profile-image`, {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
       setProfileImage(res.data.profileImageUrl);
@@ -82,7 +85,7 @@ export default function Settings() {
     formData.append('profileImage', selectedImage);
 
     try {
-      await axios.post(`http://localhost:7100/user/upload-image`, formData, {
+      await axios.post(`${backendUrl}/user/upload-image`, formData, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
           'Content-Type': 'multipart/form-data',
@@ -103,7 +106,7 @@ export default function Settings() {
     formData.append('profileImage', selectedImage);
 
     try {
-      await axios.patch(`http://localhost:7100/user/update-profile-image`, formData, {
+      await axios.patch(`${backendUrl}/user/update-profile-image`, formData, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
           'Content-Type': 'multipart/form-data',
@@ -120,7 +123,7 @@ export default function Settings() {
 
   const handleRemoveImage = async () => {
     try {
-      await axios.delete(`http://localhost:7100/user/remove-profile-image`, {
+      await axios.delete(`${backendUrl}/user/remove-profile-image`, {
         headers: { Authorization: `Bearer ${getToken()}` },
       });
       setProfileImage('');

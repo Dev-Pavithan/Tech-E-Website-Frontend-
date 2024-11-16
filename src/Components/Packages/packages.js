@@ -7,6 +7,9 @@ import TechE from './Logo version04.png';
 import './userPackage.css';
 import Payment from '../Payment/Payment.js';
 
+// Fetching the backend URL from environment variables
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export default function Packages() {
   const [packages, setPackages] = useState([]);
   const [showModal, setShowModal] = useState(false); // State to control modal visibility
@@ -28,7 +31,8 @@ export default function Packages() {
 
   const fetchPackages = async () => {
     try {
-      const response = await axios.get('http://localhost:7100/api/packages');
+      // Using the dynamic backend URL from the environment variable
+      const response = await axios.get(`${backendUrl}/api/packages`);
       setPackages(response.data);
     } catch (error) {
       console.error('Error fetching packages:', error);

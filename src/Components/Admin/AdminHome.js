@@ -11,9 +11,6 @@ import { Modal, Button } from 'react-bootstrap';
 import { useOutletContext } from 'react-router-dom';
 import { useTranslation } from 'react-i18next'; // Import the translation hook
 
-
-
-
 ChartJS.register(Title, Tooltip, Legend, ArcElement);
 
 export default function Home() {
@@ -35,6 +32,8 @@ export default function Home() {
   const [userData, setUserData] = useState(null); // State to hold user data
   const { isDarkMode } = useOutletContext();
 
+  // Get the backend URL from the environment variable
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     fetchData();
@@ -51,7 +50,7 @@ export default function Home() {
     }
 
     try {
-      const userResponse = await axios.get('http://localhost:7100/user/all', {
+      const userResponse = await axios.get(`${backendUrl}/user/all`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -64,7 +63,7 @@ export default function Home() {
       setData(prev => ({ ...prev, active, blocked }));
 
       // Fetching messages from the new endpoint
-      const messageResponse = await axios.get('http://localhost:7100/contact/all', {
+      const messageResponse = await axios.get(`${backendUrl}/contact/all`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -101,7 +100,7 @@ export default function Home() {
 
   const fetchPackages = async () => {
     try {
-      const response = await axios.get('http://localhost:7100/api/packages');
+      const response = await axios.get(`${backendUrl}/api/packages`);
       setPackages(response.data);
     } catch (error) {
       console.error('Error fetching packages:', error);
@@ -110,7 +109,7 @@ export default function Home() {
 
   const fetchRecentTransactions = async () => {
     try {
-      const response = await axios.get('http://localhost:7100/api/payments/payment-intents');
+      const response = await axios.get(`${backendUrl}/api/payments/payment-intents`);
       setRecentTransactions(response.data.slice(0, 3));
     } catch (error) {
       console.error('Error fetching recent transactions:', error);
@@ -119,7 +118,7 @@ export default function Home() {
 
   const fetchTotalIncome = async () => {
     try {
-      const response = await axios.get('http://localhost:7100/api/payments/payment-intents');
+      const response = await axios.get(`${backendUrl}/api/payments/payment-intents`);
       const totalIncome = response.data.reduce((sum, transaction) => sum + (transaction.amount || 0), 0);
       setTotalIncome(totalIncome);
     } catch (error) {
@@ -181,7 +180,6 @@ export default function Home() {
       borderWidth: 2,
     }],
   };
-
   return (
     <div className={`container ${isDarkMode ? 'dark' : ''}`}>
       <div className="row">

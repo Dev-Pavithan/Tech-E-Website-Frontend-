@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import './AvailablePackages.css';
 
+// Fetching the backend URL from environment variables
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export default function UserAvailablePackages({ show, handleClose }) {
   const [packageDetails, setPackageDetails] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,7 +17,8 @@ export default function UserAvailablePackages({ show, handleClose }) {
       const fetchPackageDetails = async () => {
         try {
           const packagePromises = userPackages.map((packageId) =>
-            fetch(`http://localhost:7100/api/packages/${packageId}`).then((res) => res.json())
+            // Using dynamic backend URL
+            fetch(`${backendUrl}/api/packages/${packageId}`).then((res) => res.json())
           );
           const packageData = await Promise.all(packagePromises);
           setPackageDetails(packageData);
@@ -32,7 +36,7 @@ export default function UserAvailablePackages({ show, handleClose }) {
   }, []);
 
   const handleGoClick = (pkg) => {
-    const hasPurchasedPackage = true; 
+    const hasPurchasedPackage = true; // Assuming the package is purchased
     if (hasPurchasedPackage) {
       const price = parseFloat(pkg.price);
       const redirectMap = {

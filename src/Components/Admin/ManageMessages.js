@@ -22,6 +22,9 @@ export default function ManageMessages() {
   // Retrieve user email from localStorage
   const userEmail = localStorage.getItem('userEmail');
 
+  // Get the backend URL from the environment variable
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     if (!token) {
@@ -32,7 +35,7 @@ export default function ManageMessages() {
 
     const fetchMessages = async () => {
       try {
-        const response = await axios.get('http://localhost:7100/contact/all', {
+        const response = await axios.get(`${backendUrl}/contact/all`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -44,12 +47,12 @@ export default function ManageMessages() {
     };
 
     fetchMessages();
-  }, [navigate, t]); // Add t as a dependency
+  }, [navigate, t, backendUrl]); // Add backendUrl as a dependency
 
   const handleSearch = async () => {
     const token = sessionStorage.getItem('token');
     try {
-      const response = await axios.get(`http://localhost:7100/contact/by-email/${searchEmail}`, {
+      const response = await axios.get(`${backendUrl}/contact/by-email/${searchEmail}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -76,7 +79,7 @@ export default function ManageMessages() {
 
     try {
       await axios.post(
-        'http://localhost:7100/contact/reply',
+        `${backendUrl}/contact/reply`,
         {
           from: userEmail,
           to: replyEmail,

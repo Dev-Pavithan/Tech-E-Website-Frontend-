@@ -17,6 +17,9 @@ export default function UserManagement() {
   const navigate = useNavigate();
   const { isDarkMode } = useOutletContext();
 
+  // Get the backend URL from the environment variable
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     if (!token) {
@@ -27,7 +30,7 @@ export default function UserManagement() {
   
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:7100/user/all', {
+        const response = await axios.get(`${backendUrl}/user/all`, {
           headers: { Authorization: `Bearer ${token}` },
         });
   
@@ -44,12 +47,12 @@ export default function UserManagement() {
     };
   
     fetchUsers();
-  }, [navigate, t]);
-  
+  }, [navigate, t, backendUrl]);
+
   const handleSearch = async () => {
     const token = sessionStorage.getItem('token');
     try {
-      const response = await axios.get(`http://localhost:7100/user/by-email/${searchEmail}`, {
+      const response = await axios.get(`${backendUrl}/user/by-email/${searchEmail}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -68,7 +71,7 @@ export default function UserManagement() {
   const handleBlockToggle = async (id, currentlyBlocked) => {
     const token = sessionStorage.getItem('token');
     try {
-      const response = await axios.patch(`http://localhost:7100/user/${id}/block`, {}, {
+      const response = await axios.patch(`${backendUrl}/user/${id}/block`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -83,7 +86,7 @@ export default function UserManagement() {
     const token = sessionStorage.getItem('token');
     try {
       const response = await axios.patch(
-        `http://localhost:7100/user/edit-role/${id}`,
+        `${backendUrl}/user/edit-role/${id}`,
         { role: newRole },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -135,30 +138,29 @@ export default function UserManagement() {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>
-                <Dropdown>
-  <Dropdown.Toggle
-    variant="link"
-    id="dropdown-basic"
-    className={`role-dropdown-toggle ${user.role === 'user' ? 'user-role' : 'admin-role'}`}
-  >
-    {user.role === 'admin' ? <FaUserShield /> : <FaUser />} <FaChevronDown />
-  </Dropdown.Toggle>
-  <Dropdown.Menu>
-    <Dropdown.Item
-      onClick={() => handleRoleToggle(user._id, 'user')}
-      className={user.role === 'user' ? 'user-role' : ''}
-    >
-      {t('User')}
-    </Dropdown.Item>
-    <Dropdown.Item
-      onClick={() => handleRoleToggle(user._id, 'admin')}
-      className={user.role === 'admin' ? 'admin-role' : ''}
-    >
-      {t('Admin')}
-    </Dropdown.Item>
-  </Dropdown.Menu>
-</Dropdown>
-
+                  <Dropdown>
+                    <Dropdown.Toggle
+                      variant="link"
+                      id="dropdown-basic"
+                      className={`role-dropdown-toggle ${user.role === 'user' ? 'user-role' : 'admin-role'}`}
+                    >
+                      {user.role === 'admin' ? <FaUserShield /> : <FaUser />} <FaChevronDown />
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      <Dropdown.Item
+                        onClick={() => handleRoleToggle(user._id, 'user')}
+                        className={user.role === 'user' ? 'user-role' : ''}
+                      >
+                        {t('User')}
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        onClick={() => handleRoleToggle(user._id, 'admin')}
+                        className={user.role === 'admin' ? 'admin-role' : ''}
+                      >
+                        {t('Admin')}
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </td>
                 <td>{user.blocked ? t('Blocked') : t('Active')}</td>
                 <td>

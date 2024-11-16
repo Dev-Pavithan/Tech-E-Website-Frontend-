@@ -16,6 +16,9 @@ export default function Nav({ openLoginModal }) {
   const [showPasswordChangePrompt, setShowPasswordChangePrompt] = useState(false); // New state for password change prompt
   const navigate = useNavigate();
 
+  // Get the backend URL from environment variable
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   // Check if login modal should be shown after page reload
   useEffect(() => {
     const role = sessionStorage.getItem('role');
@@ -42,7 +45,7 @@ export default function Nav({ openLoginModal }) {
     const email = localStorage.getItem('userEmail');
     if (email) {
       try {
-        const response = await fetch(`http://localhost:7100/user/by-email/${email}`, {
+        const response = await fetch(`${backendUrl}/user/by-email/${email}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
@@ -66,7 +69,7 @@ export default function Nav({ openLoginModal }) {
     try {
       const packageDetails = await Promise.all(
         packageIds.map(async (packageId) => {
-          const response = await fetch(`http://localhost:7100/api/packages/${packageId}`);
+          const response = await fetch(`${backendUrl}/api/packages/${packageId}`);
           if (response.ok) {
             const packageData = await response.json();
             return packageData.name;

@@ -13,6 +13,9 @@ export default function AvatarMaintain() {
   const [uploadedImages, setUploadedImages] = useState([]);
   const { isDarkMode } = useOutletContext();
 
+  // Get the backend URL from the environment variable
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
@@ -34,7 +37,7 @@ export default function AvatarMaintain() {
     formData.append('email', email);
 
     try {
-      const response = await axios.post('http://localhost:7100/api/images/upload', formData, {
+      const response = await axios.post(`${backendUrl}/api/images/upload`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -64,7 +67,7 @@ export default function AvatarMaintain() {
     }
 
     try {
-      await axios.post('http://localhost:7100/api/images/edit', { 
+      await axios.post(`${backendUrl}/api/images/edit`, { 
         email: storedEmail,
         imageUrl: storedImageUrl
       });

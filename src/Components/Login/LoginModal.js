@@ -7,6 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import Google from './google.png';
 import './LoginModal.css';
 
+// Fetching backend URL from environment variables
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const useForm = (initialState) => {
     const [formData, setFormData] = useState(initialState);
     const handleChange = (e) => {
@@ -77,8 +80,8 @@ export default function LoginModal({ show, handleClose, openRegisterModal }) {
                     name: decodedData.name,
                     id: decodedData.sub,
                 };
-
-                const loginResponse = await axios.post('http://localhost:7100/user/login', userData);
+                // Using the dynamic backend URL from the environment variable
+                const loginResponse = await axios.post(`${backendUrl}/user/login`, userData);
                 storeUserDetails(loginResponse.data);
                 toast.success('Login successful! Redirecting...', { position: 'top-right', autoClose: 5000 });
 
@@ -110,7 +113,8 @@ export default function LoginModal({ show, handleClose, openRegisterModal }) {
             return;
         }
         try {
-            const loginResponse = await axios.post('http://localhost:7100/user/login', formData);
+            // Using the dynamic backend URL from the environment variable
+            const loginResponse = await axios.post(`${backendUrl}/user/login`, formData);
             storeUserDetails(loginResponse.data);
             toast.success('Login successful! Redirecting...', { position: 'top-right', autoClose: 5000 });
 

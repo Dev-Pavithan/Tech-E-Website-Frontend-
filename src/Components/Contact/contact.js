@@ -4,6 +4,9 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import the Toastify CSS
 import './contactModal.css';
 
+// Fetching the backend URL from environment variables
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export default function ContactModal({ show, handleClose }) {
   const [formData, setFormData] = useState({
     name: '',
@@ -16,7 +19,7 @@ export default function ContactModal({ show, handleClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:7100/contact', {
+      const response = await fetch(`${backendUrl}/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -26,7 +29,7 @@ export default function ContactModal({ show, handleClose }) {
 
       if (response.ok) {
         toast.success('Message sent successfully!');
-        setFormData({ name: '', email: '', phone: '', message: '' }); // Reset form including phone
+        setFormData({ name: '', email: '', phone: '', message: '' }); // Reset form
         handleClose(); // Close modal
       } else {
         toast.error('Failed to send message.');

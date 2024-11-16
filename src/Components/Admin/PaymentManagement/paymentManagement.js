@@ -12,10 +12,13 @@ export default function PaymentManagement() {
   const [search, setSearch] = useState('');
   const { isDarkMode } = useOutletContext();
 
+  // Get the backend URL from the environment variable
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     const fetchPayments = async () => {
       try {
-        const response = await axios.get('http://localhost:7100/api/payments/payment-intents');
+        const response = await axios.get(`${backendUrl}/api/payments/payment-intents`);
         setPayments(response.data);
       } catch (error) {
         console.error('Error fetching payment data:', error);
@@ -23,7 +26,7 @@ export default function PaymentManagement() {
     };
 
     fetchPayments();
-  }, []);
+  }, [backendUrl]);
 
   const filteredPayments = payments.filter(payment =>
     (payment.cardholderName || '').toLowerCase().includes(search.toLowerCase()) ||

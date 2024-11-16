@@ -27,6 +27,9 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
+  // Get the backend URL from the environment variable
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   useEffect(() => {
     loadGoogleScript().then(() => {
       window.google.accounts.id.initialize({
@@ -58,7 +61,8 @@ export default function Register() {
     }
 
     try {
-      const response = await axios.post('http://localhost:7100/user/register', formData);
+      // Use the dynamic backend URL for registration
+      const response = await axios.post(`${backendUrl}/user/register`, formData);
       console.log('Registration successful', response.data);
 
       toast.success('Registration successful! You can now log in.', {
@@ -92,7 +96,8 @@ export default function Register() {
       };
 
       try {
-        const res = await axios.post('http://localhost:7100/user/register', userData);
+        // Use the dynamic backend URL for Google registration
+        const res = await axios.post(`${backendUrl}/user/register`, userData);
         console.log('Google Registration successful:', res.data);
         toast.success('Registration successful! You can now log in.', {
           position: "top-right",

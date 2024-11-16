@@ -17,6 +17,9 @@ export default function AdminDashboard() {
   const userName = localStorage.getItem('userName') || 'Admin';
   const userEmail = localStorage.getItem('userEmail') || 'admin@example.com';
 
+  // Get the backend URL from the environment variable
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   const getButtonClassName = (path) => {
     return location.pathname === path ? 'btn btn-primary-AD active' : 'btn btn-primary-AD';
   };
@@ -28,7 +31,7 @@ export default function AdminDashboard() {
 
     const fetchUserProfileImage = async () => {
       try {
-        const res = await axios.get('http://localhost:7100/user/profile-image', {
+        const res = await axios.get(`${backendUrl}/user/profile-image`, {
           headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` },
         });
         setProfileImage(res.data.profileImageUrl || 'path/to/default-placeholder.png');
@@ -38,7 +41,7 @@ export default function AdminDashboard() {
     };
 
     fetchUserProfileImage();
-  }, [location.pathname, navigate]);
+  }, [location.pathname, navigate, backendUrl]);
 
   const handleHomeNavigation = () => {
     localStorage.clear();
@@ -125,7 +128,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className={`right-section ${isDarkMode ? 'dark' : ''}`}>
-      <Outlet context={{ isDarkMode }} />
+        <Outlet context={{ isDarkMode }} />
       </div>
     </div>
   );

@@ -39,9 +39,9 @@ i18n.use(initReactI18next).init({
     es: { translation: es },
     ta: { translation: ta }
 
-   
+
   },
-  lng: localStorage.getItem('language') || 'en', 
+  lng: localStorage.getItem('language') || 'en',
   fallbackLng: 'en',
   interpolation: { escapeValue: false },
 });
@@ -121,6 +121,17 @@ export default function Main() {
   const closeContactModal = () => {
     setShowContactModal(false);
   };
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
+  // Example API call using the backend URL
+  fetch(`${backendUrl}/api`)
+    .then(response => response.json())
+    .then(data => {
+      console.log('Backend data:', data);
+    })
+    .catch(error => {
+      console.error('Error fetching data:', error);
+    });
 
   useEffect(() => {
     checkLoginStatus(); // Check login status only on mount
@@ -138,7 +149,7 @@ export default function Main() {
 
         <Route path="/userAvailablePackages" element={<UserAvailablePackages />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/packages" element={<Packages/>} />
+        <Route path="/packages" element={<Packages />} />
         <Route path="/payment" element={<Payment />} />
 
         {/* Admin routes */}
