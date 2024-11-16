@@ -1,0 +1,209 @@
+/* Define light mode colors in :root */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #181818;
+  --title-color: #181818;
+  --form-bg-color: #7700ff21;
+  --button-bg-upload: #6200ff;
+  --button-bg-email: #46a728;
+  --input-bg-color: rgba(255, 255, 255, 0.1);
+  --input-border-color: rgba(255, 255, 255, 0.5);
+  --preview-bg-color: #7700ff21;
+  --preview-title-color: #000000;
+  --no-images-color: #888;
+}
+
+/* Dark Mode Styling */
+.dark-mode {
+  background-color: #181818;
+  color: white;
+}
+.dark-mode .avatar-maintain-container{
+  background-color: #181818;
+}
+.dark-mode .title {
+  color: rgb(255 255 255);
+}
+.dark-mode .form-title,
+.dark-mode .input-label,
+.dark-mode .preview-title,
+.dark-mode .no-images {
+  color: white;
+}
+
+.dark-mode .upload-section,
+.dark-mode .preview-section {
+  background-color: #333;
+}
+
+.dark-mode .input-field {
+  background-color: #555;
+  color: white;
+  border: 1px solid #777;
+}
+
+.dark-mode .input-field:focus {
+  border-color: #007bffa2;
+}
+
+.dark-mode .btn-m-upload {
+  background: linear-gradient(to right, #822faf, #973aa8, #c05299);
+}
+
+.dark-mode .btn-m-email {
+  background-color: #46a728;
+}
+
+/* Light Mode Styling */
+.avatar-maintain-container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: var(--bg-color);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.568);
+  position: relative;
+}
+
+.title {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--title-color);
+}
+
+.ManageSection {
+  display: flex;
+  gap: 40px;
+}
+
+.upload-section {
+  flex: 1;
+  background-color: var(--form-bg-color);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 50px rgba(0, 0, 0, 0.5);
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-title {
+  font-size: 1.8rem;
+  color: var(--title-color);
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: var(--text-color);
+}
+
+.input-field {
+  border: 1px solid var(--input-border-color);
+  border-radius: 5px;
+  padding: 12px;
+  font-size: 1rem;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-field:focus {
+  border-color: #007bffa2;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.btn-m {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.btn-m:last-child {
+  margin-right: 0;
+}
+
+.btn-m-upload {
+  background: linear-gradient(to right, #822faf, #973aa8, #c05299);
+}
+
+.btn-m-email {
+  background-color: var(--button-bg-email);
+}
+
+.btn-m:hover {
+  color: #333;
+  box-shadow: 0 10px 25px rgba(132, 0, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.preview-section {
+  flex: 1;
+  background-color: var(--preview-bg-color);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 2px 50px rgba(0, 0, 0, 0.5);
+}
+
+.preview-title {
+  font-size: 1.8rem;
+  color: var(--preview-title-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.image-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.image-card {
+  width: 100%;
+  max-width: 220px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.image-card:hover {
+  transform: scale(1.03);
+}
+
+.img-fluid {
+  max-width: 550px;
+  max-height: 250px;
+}
+
+.no-images {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--no-images-color);
+  margin-top: 20px;
+}

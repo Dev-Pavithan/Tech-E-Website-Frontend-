@@ -1,0 +1,271 @@
+.admin-dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+#checkbox-input-left {
+  display: none;
+}
+
+
+
+.profile-section-left {
+  text-align: center;
+  position: relative;
+}
+
+.profile-image-left {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.user-name,
+.admin-email {
+  color: #fff;
+}
+
+
+
+
+
+.dark-mode-switch {
+  position: absolute;
+  top: -20px;
+  right: 30px;
+}
+
+
+
+.main-content-icon {
+  flex-grow: 3;
+  padding: 0px;
+  padding-left: 250px;
+}
+
+
+
+
+.collapsed {
+  width: 80px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.switch {
+  margin-top: 25px;
+  width: fit-content;
+  padding: 10px;
+  background-color: rgb(161, 0, 121);
+  box-shadow: 0px 0px 20px rgb(255, 0, 255);
+
+  border-radius: 50px;
+  z-index: 1;
+  cursor: pointer;
+  display: flex;
+  transition: all 0.7s;
+}
+
+#checkbox-input-left:checked+.switch {
+  background-color: rgb(0, 0, 0);
+  box-shadow: 0px 0px 20px rgb(0, 0, 0);
+
+}
+
+.left-navbar {
+  width: 250px;
+  background-image: linear-gradient(19deg, #3a0431 0%, #5e226d 100%);
+  color: #ecf0f1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image-left {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  /* Makes the image circular */
+  object-fit: cover;
+  /* Ensures the image fills the circle */
+  border: 2px solid #ecf0f1;
+  /* Optional border for aesthetics */
+}
+
+
+.right-section {
+  margin-left: 250px;
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #333;
+  transition: background 0.3s ease;
+}
+
+.right-section.collapsed {
+  background-image: linear-gradient(19deg, #5e226d 0%, #e7d6f3 100%);
+}
+
+.left-navbar h1 {
+  margin-bottom: 20px;
+  font-size: 32px;
+  border-bottom: 1px solid #b676f3;
+  padding-bottom: 10px;
+  color: #ecf0f1;
+  cursor: pointer;
+}
+
+.left-navbar button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bolder;
+  cursor: pointer;
+  background-color: #4d345e;
+  border: none;
+  color: #ecf0f1;
+  border-radius: 4px;
+  transition: background-color 0.3s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.left-navbar button:hover {
+  text-shadow: 0 0 10px rgb(255, 255, 255);
+  font-weight: bolder;
+  transform: scale(1.05);
+}
+
+.left-navbar button.active {
+  text-shadow: 0 0 10px rgb(255, 255, 255);
+  font-weight: bolder;
+  transform: scale(1.05);
+}
+
+.btn.btn-primary-AD {
+  background: linear-gradient(to right, #822faf, #973aa8, #c05299);
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.btn.btn-primary-AD:hover {
+  background: linear-gradient(to right, #973aa8, #c05299, #822faf);
+}
+
+.left-navbar i {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+
+.left-navbar button:focus {
+  box-shadow: 0 0 10px rgb(225, 0, 255);
+  outline: 2px solid #b676f3;
+  outline-offset: 2px;
+}
+
+.left-navbar button.active i {
+  color: #ffffff;
+}
+
+@media (max-width: 480px) {
+  .left-navbar {
+    width: 100%;
+    height: auto;
+    box-shadow: none;
+  }
+
+  .right-section {
+    margin-left: 0;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    flex-direction: column;
+  }
+
+  .left-navbar {
+    width: 100%;
+    height: auto;
+    position: static;
+    box-shadow: none;
+  }
+
+  .right-section {
+    margin-left: 0;
+  }
+}
+
+.profile-section-left {
+
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-image-left {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.user-name {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.admin-email {
+  font-size: 1.2em;
+  color: #ffffff8a;
+  font-weight: bold;
+
+}
+
+.right-section.dark {
+  /* background: radial-gradient(circle at 74% 94%, #222323 0%, 17.5%, rgba(34, 35, 35, 0) 35%),
+  radial-gradient(circle at 59% 67%, rgba(22, 87, 217, 0.61) 0%, 14.7%, rgba(22, 87, 217, 0) 30%),
+  radial-gradient(circle at 1% 57%, rgba(22, 87, 217, 0.38) 0%, 8%, rgba(22, 87, 217, 0) 14%),
+  radial-gradient(circle at 13% 9%, rgba(162, 56, 255, 0.24) 0%, 16.5%, rgba(162, 56, 255, 0) 55%),
+  radial-gradient(circle at 100% 37%, rgba(22, 87, 217, 0.51) 0%, 9%, rgba(22, 87, 217, 0) 18%),
+  radial-gradient(circle at 79% 58%, rgba(162, 56, 255, 0.65) 0%, 17.5%, rgba(162, 56, 255, 0) 35%),
+  radial-gradient(circle at 2% 95%, #222323 0%, 8.6%, rgba(34, 35, 35, 0) 20%),
+  radial-gradient(circle at 49% 50%, #000 0%, 100%, rgba(0, 0, 0, 0) 100%); */
+  background-color: #000000;
+  height: fixed;
+}

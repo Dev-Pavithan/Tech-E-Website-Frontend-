@@ -1,0 +1,294 @@
+/* Import Sci-Fi Font */
+/* @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Quantico&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap'); */
+/* font-family: 'Russo One', sans-serif; */
+/* font-family: 'Quantico', sans-serif; */
+/* font-family: 'Rajdhani', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@400;700&family=Tourney:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+
+/* General Styles */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Tourney', sans-serif;
+
+
+    background: radial-gradient(circle at 74% 94%, #222323 0%, 17.5%, rgba(34, 35, 35, 0) 35%),
+        radial-gradient(circle at 59% 67%, rgba(22, 87, 217, 0.61) 0%, 14.7%, rgba(22, 87, 217, 0) 30%),
+        radial-gradient(circle at 1% 57%, rgba(22, 87, 217, 0.38) 0%, 8%, rgba(22, 87, 217, 0) 14%),
+        radial-gradient(circle at 13% 9%, rgba(162, 56, 255, 0.24) 0%, 16.5%, rgba(162, 56, 255, 0) 55%),
+        radial-gradient(circle at 100% 37%, rgba(22, 87, 217, 0.51) 0%, 9%, rgba(22, 87, 217, 0) 18%),
+        radial-gradient(circle at 79% 58%, rgba(162, 56, 255, 0.65) 0%, 17.5%, rgba(162, 56, 255, 0) 35%),
+        radial-gradient(circle at 2% 95%, #222323 0%, 8.6%, rgba(34, 35, 35, 0) 20%),
+        radial-gradient(circle at 49% 50%, #000 0%, 100%, rgba(0, 0, 0, 0) 100%);
+    background-size: cover;
+    height: calc(110vh - 0vh);
+    padding-bottom: 70px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Intro Section */
+.intro-section {
+    margin-top: 0;
+    color: #ffffff;
+}
+
+.Hello {
+    font-size: 70px;
+    font-weight: bolder;
+    animation: slideBottom 1s ease forwards;
+    animation-delay: 0.5s;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.548);
+    margin-bottom: 60px; 
+
+}
+
+.Tech-E {
+    font-size: 110px;
+    font-weight: bolder;
+    animation: slideBottom 1s ease forwards;
+    animation-delay: 0.5s;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.548);
+    margin-bottom: 60px; 
+
+}
+
+.text {
+    font-size: 55px;
+    color: #ff00ff;
+    font-weight: bolder;
+    text-shadow: 0 0 8px rgba(255, 0, 234, 0.8);
+    margin-bottom: 60px; 
+
+}
+
+.intro-section p {
+    font-size: 30px;
+    animation: slideLeft 1s ease forwards;
+    animation-delay: 1s;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    margin-bottom: 60px; 
+}
+
+/* Button Styles */
+.btn-home {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 60px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    background-image: linear-gradient(19deg, #2f003a 0%, #a96dd4 100%);
+    border: none;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    margin-right: 10px;
+    box-sizing: border-box;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    margin-bottom: 60px; 
+
+}
+/* Button Styles */
+.btn-home {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 60px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+    background-image: linear-gradient(19deg, #2f003a 0%, #a96dd4 100%);
+    border: none;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    margin-right: 20px; /* Increased gap between buttons */
+    box-sizing: border-box;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    margin-bottom: 60px; 
+}
+
+/* If you want more control over the gap specifically for the second button */
+.btn-home + .btn-home {
+    margin-left: 20px; /* This will apply the margin only to the second button */
+}
+
+.btn-home:hover {
+    color: #ffffff;
+    background: #a238FF;
+    background-image: linear-gradient(19deg, #2f003a 0%, #a96dd4 100%);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(183, 0, 255, 0.8), inset 0 0 10px rgba(174, 0, 255, 0.5);
+}
+
+/* For Extra Small Devices (Mobile Portrait, <576px) */
+@media (max-width: 575px) {
+    .hero {
+        height: auto; /* Allow the hero section to grow dynamically */
+        padding-top: 90px; /* Adjust padding to account for navbar height */
+    }
+
+    .Hello {
+        font-size: 40px;
+        margin-bottom: 30px;
+    }
+
+    .Tech-E {
+        font-size: 60px;
+        margin-bottom: 30px;
+    }
+
+    .text {
+        font-size: 40px;
+        margin-bottom: 30px;
+    }
+
+    .intro-section p {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    .btn-home {
+        width: 120px;
+        height: 50px;
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    .AvaterHome img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* For Small Devices (Mobile Landscape, 576px - 767px) */
+@media (max-width: 767px) and (min-width: 576px) {
+    .hero {
+        height: auto; /* Allow the hero section to grow dynamically */
+        padding-top: 90px; /* Adjust padding to account for navbar height */
+    }
+
+    .Hello {
+        font-size: 50px;
+        margin-bottom: 40px;
+    }
+
+    .Tech-E {
+        font-size: 80px;
+        margin-bottom: 40px;
+    }
+
+    .text {
+        font-size: 60px;
+        margin-bottom: 40px;
+    }
+
+    .intro-section p {
+        font-size: 25px;
+        margin-bottom: 40px;
+    }
+
+    .btn-home {
+        width: 130px;
+        height: 55px;
+        font-size: 1.3rem;
+        margin-bottom: 40px;
+    }
+
+    .AvaterHome img {
+        width: 110%;
+        height: auto;
+    }
+}
+
+/* For Medium Devices (Tablets, 768px - 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .hero {
+        height: auto; /* Allow the hero section to grow dynamically */
+        padding-top: 100px; /* Adjust padding to account for navbar height */
+    }
+
+    .Hello {
+        font-size: 60px;
+        margin-bottom: 50px;
+    }
+
+    .Tech-E {
+        font-size: 90px;
+        margin-bottom: 50px;
+    }
+
+    .text {
+        font-size: 70px;
+        margin-bottom: 50px;
+    }
+
+    .intro-section p {
+        font-size: 28px;
+        margin-bottom: 50px;
+    }
+
+    .btn-home {
+        width: 140px;
+        height: 55px;
+        font-size: 1.3rem;
+        margin-bottom: 50px;
+    }
+
+    .AvaterHome img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* For Large Devices (Desktops, 992px - 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+    .hero {
+        height: calc(100vh - 70px); /* Ensure hero takes full screen minus navbar height */
+        padding-top: 70px; /* Adjust padding to account for navbar height */
+    }
+
+    .Hello {
+        font-size: 70px;
+        margin-bottom: 50px;
+    }
+
+    .Tech-E {
+        font-size: 100px;
+        margin-bottom: 50px;
+    }
+
+    .text {
+        font-size: 75px;
+        margin-bottom: 50px;
+    }
+
+    .intro-section p {
+        font-size: 30px;
+        margin-bottom: 50px;
+    }
+
+    .btn-home {
+        width: 150px;
+        height: 60px;
+        font-size: 1.4rem;
+        margin-bottom: 50px;
+    }
+
+    .AvaterHome img {
+        width: 110%;
+        height: auto;
+    }
+}
+

@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+.Blog {
+  background-color: #000;
+  padding-top: 50px;
+  
+}
+.body {
+  background-color: #000;
+  margin: 0;
+  width: 100%;
+  overflow-x: hidden;  
+}
+.blog-header {
+  color: #fff;
+  margin-top: 80px;
+  font-family: 'Tourney', sans-serif;
+
+}
+
+.blog-description {
+  
+  color: #fff;
+  max-width: 1200px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.blog-container {
+  
+  background-color: #1c1c1c33;
+  color: #f9f9f9;
+  border-radius: 1rem;
+  padding: 20px;
+  box-shadow: inset 0 0 1rem rgba(255, 255, 255, 0.1);
+  transition: transform 0.5s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.blog-container:hover {
+  transform: translateY(-10px);
+  background: transparent;
+}
+.blog-row{
+  gap: 80px;
+}
+.blog-image {
+  width: 350px;
+  height: 200px; /* Fixed height */
+  object-fit: cover; /* Ensures the image is cropped to fit the aspect ratio */
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+
+.blog-post-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-family: 'Tourney', sans-serif;
+  margin-top: 10px;
+  color: #f9f9f9;
+  text-align: center;
+}
+
+.blog-date {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.blog-content {
+  font-size: 1rem;
+  text-align: justify;
+}
+
+.blog-footer {
+  margin-top: auto;
+  width: 100%;
+  gap: 5px;
+
+}
+
+.btn-primary-ReadMore {
+  display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 60px;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    color: #ffffff;
+    text-decoration: none;
+    background-image: linear-gradient(19deg, #2f003a 0%, #a96dd4 100%);
+    border: none;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    margin-right: 10px;
+    box-sizing: border-box;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+  padding: 10px 20px;
+}
+
+.btn-primary-ReadMore:hover {
+  background-image: linear-gradient(19deg, #a96dd4 0%,#ce44ce 50%, #2f003a 100%);
+}
