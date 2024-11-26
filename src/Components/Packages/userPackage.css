@@ -151,113 +151,65 @@
   .btn.btn-primary-pu:hover {
     background: linear-gradient(to right, #973aa8, #c05299, #822faf);
   }
+  @media (max-width: 576px) {
+    .appContainer {
+      margin-top: 0; /* Adjust the top margin for smaller devices */
+      height: 130vh; /* Allow height to adapt to content */
+      padding-top: 20px;
+    }
   
-  /* For very small devices (portrait phones, less than 576px) */
-@media (max-width: 575.98px) {
-  .cards {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    margin: 0 2vw;
-  }
+    .cards {
+      margin: 1rem 5vw; /* Reduce margins for smaller screens */
+      margin-left: 5em; /* Align cards properly for smaller screens */
+      grid-template-columns: 1fr; /* Single column for better readability */
+      gap: 1em; 
+
+    }
   
-  .card__image {
-    width: 100%;
-    height: auto;
-  }
-
-  .card__title {
-    font-size: 1.4em;
-  }
-
-  .card__status {
-    font-size: 1.8em;
-  }
-
-  .card__description {
-    font-size: 1em;
-    -webkit-line-clamp: 8;
-  }
-
-  .btn {
-    font-size: 0.9em;
-  }
-}
-
-/* For small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-  .cards {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
+    .packagecard {
+      width: 80%; /* Full width for smaller screens */
+      height: auto; /* Allow height to adapt */
+    }
   
-  .card__image {
-    width: 100%;
-    height: auto;
-  }
-
-  .card__title {
-    font-size: 1.5em;
-  }
-
-  .card__status {
-    font-size: 2em;
-  }
-
-  .card__description {
-    font-size: 1.1em;
-    -webkit-line-clamp: 10;
-  }
-}
-
-/* For medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+    .card__image {
+      width: 100%; /* Scale the image to fit the card */
+      height: auto; /* Maintain aspect ratio */
+    }
+  
+    .card__header {
+      flex-direction: column; /* Stack header content vertically */
+      gap: 1em; /* Adjust spacing */
+      padding: 1em; /* Reduce padding */
+    }
+  
+    .card__thumb {
+      width: 40px; /* Adjust thumbnail size */
+      height: 40px;
+    }
+  
+    .card__title {
+      font-size: 1.5em; /* Reduce font size for smaller screens */
+    }
+  
+    .card__tagline {
+      font-size: 0.7em; /* Adjust font size */
+    }
+  
+    .card__status {
+      font-size: 2em; /* Slightly smaller for smaller screens */
+    }
+  
+    .card__description {
+      font-size: 1em; /* Adjust font size */
+      -webkit-line-clamp: 10; /* Limit the text for readability */
+    }
+  
+    .btn.btn-primary-pu {
+      font-size: 16px; /* Slightly smaller button text */
+      padding: 8px; /* Adjust padding */
+      width: 120px; /* Adjust button width */
+      bottom: 0.5em;
+      right: 0.5em;
+    }
   }
   
-  .card__image {
-    width: 100%;
-    height: auto;
-  }
-
-  .card__title {
-    font-size: 1.6em;
-  }
-
-  .card__status {
-    font-size: 2.2em;
-  }
-
-  .card__description {
-    font-size: 1.2em;
-    -webkit-line-clamp: 15;
-  }
-}
-
-/* For large devices (desktops, 992px and up) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-  .cards {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-  
-  .card__image {
-    width: 100%;
-    height: auto;
-  }
-
-  .card__title {
-    font-size: 1.7em;
-  }
-
-  .card__status {
-    font-size: 2.3em;
-  }
-
-  .card__description {
-    font-size: 1.3em;
-    -webkit-line-clamp: 18;
-  }
-}
-

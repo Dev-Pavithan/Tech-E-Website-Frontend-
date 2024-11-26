@@ -30,6 +30,33 @@
   border-radius: 15px;
 }
 
+@media (max-width: 576px) {
+  .demo-section01 {
+    height: auto; /* Adjust the height for smaller devices */
+    background: radial-gradient(circle at 74% 94%, #222323 0%, 17.5%, rgba(34, 35, 35, 0) 35%),
+                radial-gradient(circle at 59% 67%, rgba(22, 87, 217, 0.61) 0%, 14.7%, rgba(22, 87, 217, 0) 30%),
+                radial-gradient(circle at 1% 57%, rgba(22, 87, 217, 0.38) 0%, 8%, rgba(22, 87, 217, 0) 14%),
+                radial-gradient(circle at 100% 37%, rgba(22, 87, 217, 0.51) 0%, 9%, rgba(22, 87, 217, 0) 18%),
+                radial-gradient(circle at 79% 58%, rgba(162, 56, 255, 0.65) 0%, 17.5%, rgba(162, 56, 255, 0) 35%),
+                radial-gradient(circle at 49% 50%, #3f3f3f 0%, 100%, rgba(65, 63, 63, 0) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7;
+  }
+
+  .demo-section {
+    width: 100%; /* Ensure it fits smaller screens */
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .demo-video {
+    width: 100%; /* Scale the video to fit smaller devices */
+    height: auto; /* Maintain aspect ratio */
+
+  }
+}
 
 /* @import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Climate+Crisis&family=Concert+One&family=Honk:MORF,SHLN@0..45,0..100&family=Meow+Script&family=Montserrat+Subrayada:wght@400;700&family=Ribeye+Marrow&family=Tourney:ital,wght@0,100..900;1,100..900&family=Turret+Road:wght@200;300;400;500;700;800&display=swap');
 .demo-section01 {

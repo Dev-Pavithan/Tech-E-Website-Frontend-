@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Google from './google.png';
 import './RegisterModal.css';
 
-// Load Google API
 const loadGoogleScript = () => {
     return new Promise((resolve) => {
         const script = document.createElement('script');
@@ -27,6 +26,7 @@ export default function RegisterModal({ show, handleClose, openLoginModal }) {
 
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [formErrors, setFormErrors] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -39,76 +39,72 @@ export default function RegisterModal({ show, handleClose, openLoginModal }) {
     }, []);
 
     const handleChange = (e) => {
+        const { id, value } = e.target;
         setFormData({
             ...formData,
-            [e.target.id]: e.target.value,
+            [id]: value,
         });
+        setFormErrors((prevErrors) => ({ ...prevErrors, [id]: '' }));
     };
-
+    
+    const validateForm = () => {
+        const errors = {};
+    
+        // Check for missing fields
+        if (!formData.name) errors.name = 'Name is required';
+        if (!formData.email) errors.email = 'Email is required';
+        if (!formData.password) errors.password = 'Password is required';
+        if (!formData.confirmPassword) errors.confirmPassword = 'Confirm Password is required';
+    
+        // Validate email format
+        const emailRegex = /^[a-z][a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (formData.email && !emailRegex.test(formData.email)) {
+            errors.email = 'Invalid email format. Email should not start with an uppercase letter.';
+        }
+    
+        // Validate password strength
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+        if (formData.password && !passwordRegex.test(formData.password)) {
+            errors.password =
+                'Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, and a special character.';
+        }
+    
+        // Check if passwords match
+        if (formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword) {
+            errors.confirmPassword = 'Passwords do not match.';
+        }
+    
+        setFormErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { name, email, password, confirmPassword } = formData;
-        
-        // Check if all fields are filled
-        if (!name || !email || !password || !confirmPassword) {
-            const missingFields = [];
-            if (!name) missingFields.push("Name");
-            if (!email) missingFields.push("Email");
-            if (!password) missingFields.push("Password");
-            if (!confirmPassword) missingFields.push("Confirm Password");
     
-            const errorMessage = `Missing fields: ${missingFields.join(', ')}. All fields are required.`;
-            toast.error(errorMessage);
-            console.error(errorMessage);
+        if (!validateForm()) {
+            toast.error('Please correct the errors in the form.');
             return;
         }
     
-        // Email validation: First letter should not be uppercase
-        const emailRegex = /^[a-z][a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!emailRegex.test(email)) {
-            const errorMessage = 'Email should not start with an uppercase letter.';
-            toast.error(errorMessage);
-            console.error(errorMessage);
-            return;
-        }
-    
-        // Password validation: Minimum 8 characters, at least one uppercase, one lowercase, and one special character
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
-        if (!passwordRegex.test(password)) {
-            const errorMessage = 'Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, and a special character.';
-            toast.error(errorMessage);
-            console.error(errorMessage);
-            return;
-        }
-    
-        // Confirm password match
-        if (password !== confirmPassword) {
-            const errorMessage = 'Passwords do not match.';
-            toast.error(errorMessage);
-            console.error(errorMessage);
-            return;
-        }
-    
-        // If all validations pass, proceed with the registration
+        // Proceed with API call if the form is valid
         try {
             const response = await axios.post('http://localhost:7100/user/register', formData);
-            console.log('Registration successful', response.data);
-    
             toast.success('Registration successful! You can now log in.', {
-                position: "top-right",
+                position: 'top-right',
                 autoClose: 3000,
             });
     
             setTimeout(() => {
-                navigate('/'); // Redirect to login or homepage after registration
-            }, 5000);
-    
+                handleClose();
+                openLoginModal();
+            }, 3000);
         } catch (error) {
-            console.error('Registration failed', error);
+            console.error('Registration failed:', error);
             const errorMessage = error.response?.data?.message || 'Failed to register. Please try again.';
             toast.error(errorMessage);
         }
     };
+    
     
     
 
@@ -154,7 +150,7 @@ export default function RegisterModal({ show, handleClose, openLoginModal }) {
                         <label htmlFor="name" className="form-label-register">Name</label>
                         <input
                             type="text"
-                            className="form-control name-input"
+                            className="form-control name-input "
                             id="name"
                             placeholder="Enter your name"
                             value={formData.name}

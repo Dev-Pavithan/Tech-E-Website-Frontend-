@@ -149,7 +149,7 @@ export default function Main() {
 
         <Route path="/userAvailablePackages" element={<UserAvailablePackages />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/packages" element={<Packages />} />
+        <Route path="/packages" element={<Packages/>} />
         <Route path="/payment" element={<Payment />} />
 
         {/* Admin routes */}

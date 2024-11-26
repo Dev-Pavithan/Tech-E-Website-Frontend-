@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; // Import the Toastify CSS
+import 'react-toastify/dist/ReactToastify.css'; 
 import './contactModal.css';
 
-// Fetching the backend URL from environment variables
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function ContactModal({ show, handleClose }) {
@@ -15,9 +14,33 @@ export default function ContactModal({ show, handleClose }) {
     message: '',
   });
 
-  // Handle form submission
+  const [errors, setErrors] = useState({}); // To track field validation errors
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email is invalid';
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = 'Phone number is required';
+    } else if (!/^\d{10,15}$/.test(formData.phone)) {
+      newErrors.phone = 'Phone number is invalid';
+    }
+    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    return newErrors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors); // Display errors
+      return;
+    }
+
     try {
       const response = await fetch(`${backendUrl}/contact`, {
         method: 'POST',
@@ -29,8 +52,9 @@ export default function ContactModal({ show, handleClose }) {
 
       if (response.ok) {
         toast.success('Message sent successfully!');
-        setFormData({ name: '', email: '', phone: '', message: '' }); // Reset form
-        handleClose(); // Close modal
+        setFormData({ name: '', email: '', phone: '', message: '' });
+        setErrors({}); // Clear errors
+        handleClose();
       } else {
         toast.error('Failed to send message.');
       }
@@ -53,49 +77,49 @@ export default function ContactModal({ show, handleClose }) {
               <Form.Label className="form-label-contact">Name</Form.Label>
               <Form.Control
                 type="text"
-                className="form-control-contact"
+                className={`form-control-contact ${errors.name ? 'is-invalid' : ''}`}
                 placeholder="Enter your name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                required
               />
+              {errors.name && <div className="invalid-feedback">{errors.name}</div>}
             </Form.Group>
 
             <Form.Group controlId="email" className="mt-3">
               <Form.Label className="form-label-contact">Email</Form.Label>
               <Form.Control
                 type="email"
-                className="form-control-contact"
+                className={`form-control-contact ${errors.email ? 'is-invalid' : ''}`}
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                required
               />
+              {errors.email && <div className="invalid-feedback">{errors.email}</div>}
             </Form.Group>
 
             <Form.Group controlId="phone" className="mt-3">
               <Form.Label className="form-label-contact">Phone</Form.Label>
               <Form.Control
                 type="tel"
-                className="form-control-contact"
+                className={`form-control-contact ${errors.phone ? 'is-invalid' : ''}`}
                 placeholder="Enter your phone number"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                required
               />
+              {errors.phone && <div className="invalid-feedback">{errors.phone}</div>}
             </Form.Group>
 
             <Form.Group controlId="message" className="mt-3">
               <Form.Label className="form-label-contact">Message</Form.Label>
               <Form.Control
                 as="textarea"
-                className="form-control-contact"
+                className={`form-control-contact ${errors.message ? 'is-invalid' : ''}`}
                 rows={3}
                 placeholder="Enter your message"
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                required
               />
+              {errors.message && <div className="invalid-feedback">{errors.message}</div>}
             </Form.Group>
 
             <Button className="mt-3 contact-button" variant="primary" type="submit">

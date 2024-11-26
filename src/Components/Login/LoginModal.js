@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Google from './google.png';
 import './LoginModal.css';
 
-// Fetching backend URL from environment variables
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const useForm = (initialState) => {
@@ -47,6 +46,7 @@ const handleRedirect = (role, navigate) => {
 
 export default function LoginModal({ show, handleClose, openRegisterModal }) {
     const [formData, handleChange, setFormData] = useForm({ email: '', password: '' });
+    const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
@@ -57,7 +57,7 @@ export default function LoginModal({ show, handleClose, openRegisterModal }) {
             script.async = true;
             script.onload = () => {
                 window.google.accounts.id.initialize({
-                    client_id: 'YOUR_GOOGLE_CLIENT_ID', 
+                    client_id: 'YOUR_GOOGLE_CLIENT_ID',
                     callback: handleGoogleResponse,
                 });
             };
@@ -80,16 +80,15 @@ export default function LoginModal({ show, handleClose, openRegisterModal }) {
                     name: decodedData.name,
                     id: decodedData.sub,
                 };
-                // Using the dynamic backend URL from the environment variable
                 const loginResponse = await axios.post(`${backendUrl}/user/login`, userData);
                 storeUserDetails(loginResponse.data);
                 toast.success('Login successful! Redirecting...', { position: 'top-right', autoClose: 5000 });
 
                 handleCloseModal();
-                
+
                 setTimeout(() => {
                     handleRedirect(loginResponse.data.role, navigate);
-                    window.location.reload(); // Refresh the page after redirect
+                    window.location.reload();
                 }, 5000);
             } catch (error) {
                 console.error('Google login failed:', error);
@@ -105,15 +104,28 @@ export default function LoginModal({ show, handleClose, openRegisterModal }) {
         setShowPassword(!showPassword);
     };
 
+    const validateForm = () => {
+        const newErrors = {};
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email is required';
+        } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+            newErrors.email = 'Invalid email format';
+        }
+        if (!formData.password.trim()) {
+            newErrors.password = 'Password is required';
+        }
+        return newErrors;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { email, password } = formData;
-        if (!email || !password) {
-            toast.error('Please provide both email and password.');
+        const validationErrors = validateForm();
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
             return;
         }
+
         try {
-            // Using the dynamic backend URL from the environment variable
             const loginResponse = await axios.post(`${backendUrl}/user/login`, formData);
             storeUserDetails(loginResponse.data);
             toast.success('Login successful! Redirecting...', { position: 'top-right', autoClose: 5000 });
@@ -122,7 +134,7 @@ export default function LoginModal({ show, handleClose, openRegisterModal }) {
 
             setTimeout(() => {
                 handleRedirect(loginResponse.data.role, navigate);
-                window.location.reload(); // Refresh the page after redirect
+                window.location.reload();
             }, 5000);
         } catch (error) {
             console.error('Login failed:', error);
@@ -135,14 +147,14 @@ export default function LoginModal({ show, handleClose, openRegisterModal }) {
     };
 
     const handleCloseModal = () => {
-        handleClose(); // Close the modal
-        setFormData({ email: '', password: '' }); // Reset form data
+        handleClose();
+        setFormData({ email: '', password: '' });
+        setErrors({});
     };
 
     return (
         <Modal show={show} onHide={handleCloseModal} className="login-modal">
-            <Modal.Header closeButton>
-            </Modal.Header>
+            <Modal.Header closeButton />
             <Modal.Body className="modal-body">
                 <form onSubmit={handleSubmit} className="login-form">
                     <h2 className="login-head">Login</h2>
@@ -150,25 +162,24 @@ export default function LoginModal({ show, handleClose, openRegisterModal }) {
                         <label htmlFor="email" className="form-label-login">Email</label>
                         <input
                             type="email"
-                            className="form-control email-input"
+                            className={`form-control email-input ${errors.email ? 'is-invalid' : ''}`}
                             id="email"
                             placeholder="Enter your email"
                             value={formData.email}
                             onChange={handleChange}
-                            required
                         />
+                        {errors.email && <div className="invalid-feedback">{errors.email}</div>}
                     </div>
                     <div className="form-group password-group">
                         <label htmlFor="password" className="form-label-login">Password</label>
                         <div className="password-container">
                             <input
                                 type={showPassword ? 'text' : 'password'}
-                                className="form-control password-input"
+                                className={`form-control password-input ${errors.password ? 'is-invalid' : ''}`}
                                 id="password"
                                 placeholder="Enter your password"
                                 value={formData.password}
                                 onChange={handleChange}
-                                required
                             />
                             <span
                                 className="toggle-password-login"
@@ -177,6 +188,7 @@ export default function LoginModal({ show, handleClose, openRegisterModal }) {
                                 {showPassword ? 'Hide' : 'Show'}
                             </span>
                         </div>
+                        {errors.password && <div className="invalid-feedback">{errors.password}</div>}
                     </div>
                     <div className="form-group forgot-password-group">
                         <a href="#!" className="forgot-password">Forgot Password?</a>
