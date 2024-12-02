@@ -121,7 +121,9 @@ export default function Main() {
   const closeContactModal = () => {
     setShowContactModal(false);
   };
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  // const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
+  const backendUrl =  "https://tech-e-website-backend.vercel.app"
 
   // Example API call using the backend URL
   fetch(`${backendUrl}/api`)
