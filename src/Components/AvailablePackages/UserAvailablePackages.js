@@ -3,7 +3,9 @@ import { Modal } from 'react-bootstrap';
 import axios from 'axios';
 import './AvailablePackages.css';
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+// const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl =  "https://tech-e-website-backend.vercel.app"
+
 
 export default function UserAvailablePackages({ show, handleClose }) {
   const [packageDetails, setPackageDetails] = useState([]);

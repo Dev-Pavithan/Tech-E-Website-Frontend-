@@ -18,7 +18,8 @@ export default function AdminDashboard() {
   const userEmail = localStorage.getItem('userEmail') || 'admin@example.com';
 
   // Get the backend URL from the environment variable
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  // const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const backendUrl =  "https://tech-e-website-backend.vercel.app"
 
   const getButtonClassName = (path) => {
     return location.pathname === path ? 'btn btn-primary-AD active' : 'btn btn-primary-AD';

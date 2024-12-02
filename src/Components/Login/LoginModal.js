@@ -7,7 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import Google from './google.png';
 import './LoginModal.css';
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+// const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl =  "https://tech-e-website-backend.vercel.app"
+
 
 const useForm = (initialState) => {
     const [formData, setFormData] = useState(initialState);

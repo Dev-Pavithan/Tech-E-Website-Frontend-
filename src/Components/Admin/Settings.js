@@ -38,7 +38,8 @@ export default function Settings() {
   const getToken = () => sessionStorage.getItem('token');
 
   // Get the backend URL from the environment variable
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  // const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const backendUrl =  "https://tech-e-website-backend.vercel.app"
 
   const fetchUserProfileImage = async () => {
     try {

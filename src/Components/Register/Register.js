@@ -28,7 +28,8 @@ export default function Register() {
   const navigate = useNavigate();
 
   // Get the backend URL from the environment variable
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  // const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const backendUrl =  "https://tech-e-website-backend.vercel.app"
 
   useEffect(() => {
     loadGoogleScript().then(() => {

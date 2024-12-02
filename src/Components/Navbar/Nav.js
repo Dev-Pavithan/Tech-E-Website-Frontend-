@@ -17,7 +17,8 @@ export default function Nav({ openLoginModal }) {
   const navigate = useNavigate();
 
   // Get the backend URL from environment variable
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  // const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const backendUrl =  "https://tech-e-website-backend.vercel.app"
 
   // Check if login modal should be shown after page reload
   useEffect(() => {

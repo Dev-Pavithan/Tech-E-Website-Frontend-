@@ -8,7 +8,9 @@ import './userPackage.css';
 import Payment from '../Payment/Payment.js';
 
 // Fetching the backend URL from environment variables
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+// const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl =  "https://tech-e-website-backend.vercel.app"
+
 
 export default function Packages() {
   const [packages, setPackages] = useState([]);

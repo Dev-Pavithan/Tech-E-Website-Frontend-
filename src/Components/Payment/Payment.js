@@ -19,7 +19,8 @@ const CheckoutForm = ({ onClose }) => {
   const [packageDetails, setPackageDetails] = useState({ name: '', description: '' });
 
   // Get the backend URL from environment variable
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  // const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const backendUrl =  "https://tech-e-website-backend.vercel.app"
 
   useEffect(() => {
     const storedAmount = sessionStorage.getItem('paymentAmount');

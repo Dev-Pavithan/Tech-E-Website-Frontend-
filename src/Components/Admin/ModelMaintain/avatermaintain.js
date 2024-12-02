@@ -14,7 +14,8 @@ export default function AvatarMaintain() {
   const { isDarkMode } = useOutletContext();
 
   // Get the backend URL from the environment variable
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  // const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const backendUrl =  "https://tech-e-website-backend.vercel.app"
 
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);

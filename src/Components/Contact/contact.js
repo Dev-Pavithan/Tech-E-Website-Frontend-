@@ -4,7 +4,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import './contactModal.css';
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+// const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl =  "https://tech-e-website-backend.vercel.app"
 
 export default function ContactModal({ show, handleClose }) {
   const [formData, setFormData] = useState({
