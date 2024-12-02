@@ -126,7 +126,7 @@ export default function Main() {
   const backendUrl =  "https://tech-e-website-backend.vercel.app"
 
   // Example API call using the backend URL
-  fetch(`${backendUrl}`)
+  fetch(`${backendUrl}/api`)
     .then(response => response.json())
     .then(data => {
       console.log('Backend data:', data);
